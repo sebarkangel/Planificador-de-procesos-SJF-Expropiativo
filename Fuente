@@ -45,7 +45,7 @@ main(){ //Ingreso y cantidad de procesos
 
         
         
-        
+ 
         //printf ("La cantidad de procesos que decide ejecutar son: %d\n",a);
         //printf ("¿Esta uds seguro que desea ejecutar los %d\n para continuar escriba SI...",);
         //scanf("%d",8a);
