@@ -1,0 +1,53 @@
+main(){ //Ingreso y cantidad de procesos
+        do{
+            int a;
+            printf ("Por favor ingrese la cantidad total de procesos a ejecutar:\n");
+            printf ("(La cantidad de procesos debe ser un numero mayor a 0 y menor a 200.)\n"); // tentativo, arreglar para MXPROCEOS
+            scanf("%d",&a);
+            if(a<0){
+                printf("Error: ingrese una cantidad de procesos mayor a 0.\n");
+            }
+            if(a>200){
+                printf("Error: ingrese una cantidad de procesos menor a 200.\n");  // tentativo, arreglar para MXPROCEOS
+            }
+        }while(a<0 || a>200);
+        
+        int b = 1;
+        int requestArribo, requestRafaga;
+        
+        do{
+            do{
+                printf("Proceso %d:\n", b);
+                printf("Ingrese el tiempo de arribo: ");
+                scanf("%d", &requestArribo);
+                printf("Ingrese el tiempo de rafaga: ");
+                scanf("%d", &requestRafaga);
+                if(requestArribo < 0){
+                    printf("Error: el tiempo de arribo ingresado debe ser mayor o igual a 0.\n");
+                }
+                if(requestRafaga =< 0){
+                    printf("Error: el tiempo de rafaga ingresado debe ser mayor a 0");
+                }
+                if(requestRafaga =< 0 || requestArribo < 0){
+                    printf("Por favor, ingrese de nuevo los valores para proceso.\n");
+                }
+            }while(requestArribo < 0 || requestRafaga =< 0) //VERIFICAR PRUEBA CON 1 o 2 ERRORES
+           
+            //posicion del arreglo b-1
+            arregloDeProcesos[b-1].idProceso = b;
+            arregloDeProcesos[b-1].tiempoArribo = requestArribo;
+            arregloDeProcesos[b-1].burstTime = requestRafaga;
+            arregloDeProcesos[b-1].burstTimeRestante = requestRafaga;
+            b++;
+        }while(b<=a);
+
+
+
+        
+        
+        
+        //printf ("La cantidad de procesos que decide ejecutar son: %d\n",a);
+        //printf ("¿Esta uds seguro que desea ejecutar los %d\n para continuar escriba SI...",);
+        //scanf("%d",8a);
+
+    }
