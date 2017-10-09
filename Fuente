@@ -1,16 +1,40 @@
-main(){ //Ingreso y cantidad de procesos
-        do{
+#include <stdlib.h>
+#include <stdio.h>
+
+#define MAX_PROCESOS 200
+
+struct str_proceso{
+    int idProceso;
+    int tiempoArribo;
+    int burstTime;
+    int burstTimeRestante;
+    int tiempoRetorno;
+    char estado = 'a';
+//    struct str_proceso *sig;
+};
+typedef struct str_proceso Proceso;
+
+void mensajeBienvenida(){
+    printf("\n -------------------------------------------------");
+    printf("\n ---    Obligatorio 1 - Sistemas operativos    ---");
+    printf("\n ---         Tecnologo en Informatica          ---");
+    printf("\n ---                 Grupo II                  ---");
+    printf("\n --- Planificador de Procesos SJF Expropiativo ---\n\n\n");
+}
+
+void ingreseCantidadProcesos(Proceso arregloDeProcesos, int &tiempototal, int &CantProcesos){
+    do{
             int a;
             printf ("Por favor ingrese la cantidad total de procesos a ejecutar:\n");
-            printf ("(La cantidad de procesos debe ser un numero mayor a 0 y menor a 200.)\n"); // tentativo, arreglar para MXPROCEOS
+            printf ("(La cantidad de procesos debe ser un numero mayor a 0 y menor a %d.)\n", MAX_PROCESOS);
             scanf("%d",&a);
             if(a<0){
                 printf("Error: ingrese una cantidad de procesos mayor a 0.\n");
             }
-            if(a>200){
-                printf("Error: ingrese una cantidad de procesos menor a 200.\n");  // tentativo, arreglar para MXPROCEOS
+            if(a>MAX_PROCESOS){
+                printf("Error: ingrese una cantidad de procesos menor a %d.\n", , MAX_PROCESOS);
             }
-        }while(a<0 || a>200);
+        }while(a<0 || a>MAX_PROCESOS);
         
         int b = 1;
         int requestArribo, requestRafaga;
@@ -31,7 +55,7 @@ main(){ //Ingreso y cantidad de procesos
                 if(requestRafaga =< 0 || requestArribo < 0){
                     printf("Por favor, ingrese de nuevo los valores para proceso.\n");
                 }
-            }while(requestArribo < 0 || requestRafaga =< 0) //VERIFICAR PRUEBA CON 1 o 2 ERRORES
+            }while(requestArribo < 0 || requestRafaga =< 0)
            
             //posicion del arreglo b-1
             arregloDeProcesos[b-1].idProceso = b;
@@ -40,14 +64,50 @@ main(){ //Ingreso y cantidad de procesos
             arregloDeProcesos[b-1].burstTimeRestante = requestRafaga;
             b++;
         }while(b<=a);
-
-
-
-        
-        
- 
-        //printf ("La cantidad de procesos que decide ejecutar son: %d\n",a);
-        //printf ("¿Esta uds seguro que desea ejecutar los %d\n para continuar escriba SI...",);
-        //scanf("%d",8a);
-
     }
+    CantProcesos = a;
+    //CALCULAMOS TOTAL DE RAFAGAS DE LOS PROCESOS PARA SABER TIEMPO TOTAL   OJO a-1 (corresponde a indice arrego?)
+    for(int i=0; i= a-1; a++){
+        tiempototal =+ arregloDeProcesos[i].burstTime;
+    }
+     
+}
+
+void procesador(Proceso arregloDeProcesos,int gantt[MAX_PROCESOS], int tiempototal, int CantProcesos){
+
+    int topeGantt = tiempototal; // NECESITAMOS SABER HASTA DONDE IMPRIMIR DIAGRAMA DE GANTT
+    int posicionGantt = 0; // PARA SABER DONDE IR GUARDANDO EL PROCESO QUE SE EJECUTA
+
+
+    for (int i=0;i<tiempototal;i++){ // RELOJ
+        
+        //CAMBIA EL ESTADO DE LOS PROCESOS A LISTOS SEGUN TIEMPOARRIBO Y RELOJ
+        for(int j=0; j<CantProcesos; j++){
+            if(arregloDeProcesos[j].tiempoArribo == i){
+                arregloDeProcesos[j].estado = 'L';
+            }
+        }
+       
+        // ************ QUEDARNOS CON EL QUE TIENE MENOR RAFAGA PARA MANDAR ID AL GANTT
+
+        for(int k=0; k<CantProcesos; k++){
+            if(arregloDeProcesos[k].estado == 'L'){
+                Proceso aux;
+                aux.idProceso = arregloDeProcesos[0].idProceso;
+            }
+        }
+    }
+
+}
+
+main(){
+
+    Proceso arregloDeProcesos[MAX_PROCESOS];
+    int CantProcesos = 0;
+    int tiempototal;
+    int gantt[MAX_PROCESOS];
+    //HACER TOPE PARA GANTT
+    mensajeBienvenida();
+    ingreseCantidadProcesos(arregloDeProcesos,tiempototal,CantProcesos);
+    procesador(arregloDeProcesos,gant,tiempototal,CantProcesos);
+}
