@@ -88,6 +88,23 @@ void procesador(Proceso arregloDeProcesos,int gantt[MAX_PROCESOS], int tiempotot
             }
         }
        
+        /*int mayor,menor; //Declaramos las variables para identificar maximo y minimo
+        //tendriamos que definir que vecto vamos utilizar?
+        mayor = vector[0]; // Le asignamos el primer elemento del array
+        menor = vector[0]; //aqui empezamos a comparar
+
+        for (j=0; j<CantProcesos;j++){
+            if (vector [i]> mayor){
+                mayor=vector[i];
+            }
+            if (vector[i] < menor)^{
+            menor= vector[i];    
+            }
+        }
+        printf("El mayor es %d\n", mayor);
+        printf("El mayor es %d\n", menor);
+        
+*/
         // ************ QUEDARNOS CON EL QUE TIENE MENOR RAFAGA PARA MANDAR ID AL GANTT
 
         for(int k=0; k<CantProcesos; k++){
